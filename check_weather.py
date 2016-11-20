@@ -9,8 +9,8 @@ from threading import Thread
 
 #### Logging Settings ####
 FILENAME = ""
-WRITE_FREQUENCY = 50
-DELAY = 5
+WRITE_FREQUENCY = 5
+DELAY = 60
 
 #### Functions ####
 def timed_log():
