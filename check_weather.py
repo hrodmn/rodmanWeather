@@ -62,22 +62,16 @@ else:
 
 file_setup(filename)
 
-if DELAY > 0:
-    data = gather_data()
-    print('reading complete')
-    Thread(target= timed_log).start()
-
 while True:
     data = gather_data()
-    if DELAY == 0:
-      log_data()
+    log_data()
     if len(batch_data) >= WRITE_FREQUENCY:
         print("Writing to file..")
         with open(filename,"a") as f:
             for line in batch_data:
                 f.write(line + "\n")
             batch_data = []
-      
+    sleep(DELAY)
 
 # aggregate, print data
 #data = [date_time, temperature, humidity]
