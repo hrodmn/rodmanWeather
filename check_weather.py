@@ -64,6 +64,7 @@ file_setup(filename)
 
 while True:
     data = gather_data()
+    print('reading complete')
     log_data()
     if len(batch_data) >= WRITE_FREQUENCY:
         print("Writing to file..")
