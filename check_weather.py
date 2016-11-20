@@ -25,7 +25,12 @@ def collect_time():
 
 def collect_data():
     humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 4)
-    temperature = temperature * 9/5.0 + 32
+    if humidity is not None and temperature is not None:
+        temperature = temperature * 9/5.0 + 32
+    else:
+        temperature = None
+        humidity = None
+    
     return humidity, temperature
 
 def gather_data():
