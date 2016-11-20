@@ -16,6 +16,8 @@ def file_setup(filename):
   with open(filename,"w") as f:
       f.write(",".join(str(value) for value in header)+ "\n")
 
+FILENAME = ""
+WRITE_FREQUENCY = 50
 
 #### Functions ####
 def collect_time():
