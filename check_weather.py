@@ -48,9 +48,9 @@ def gather_data():
 batch_data = []
 
 if FILENAME == "":
-  filename = "WeatherLog-" + str(datetime.now()) + ".csv"
+  filename = "WeatherLog-" + str(datetime.now().date()) + ".csv"
 else:
-  filename = FILENAME + "-" + str(datetime.now()) + ".csv"
+  filename = FILENAME + "-" + str(datetime.now().date()) + ".csv"
 
 file_setup(filename)
 
