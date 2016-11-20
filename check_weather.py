@@ -10,7 +10,7 @@ from threading import Thread
 #### Logging Settings ####
 FILENAME = ""
 WRITE_FREQUENCY = 50
-DELAY = 60
+DELAY = 5
 
 #### Functions ####
 def timed_log():
@@ -24,7 +24,7 @@ def log_data():
 
 def file_setup(filename):
   header  =["timestamp","humidity","temp"]
-
+  
   with open(filename,"w") as f:
       f.write(",".join(str(value) for value in header)+ "\n")
 
@@ -63,19 +63,21 @@ else:
 file_setup(filename)
 
 if DELAY > 0:
-  Thread(target= timed_log).start()
+    data = gather_data()
+    print('reading complete')
+    Thread(target= timed_log).start()
 
 while True:
-  data = gather_data()
-  if DELAY == 0:
+    data = gather_data()
+    if DELAY == 0:
       log_data()
-
-  if len(batch_data) >= WRITE_FREQUENCY:
-      print("Writing to file..")
-      with open(filename,"a") as f:
-          for line in batch_data:
-              f.write(line + "\n")
-          batch_data = []
+    if len(batch_data) >= WRITE_FREQUENCY:
+        print("Writing to file..")
+        with open(filename,"a") as f:
+            for line in batch_data:
+                f.write(line + "\n")
+            batch_data = []
+      
 
 # aggregate, print data
 #data = [date_time, temperature, humidity]
