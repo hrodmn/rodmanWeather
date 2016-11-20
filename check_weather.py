@@ -3,9 +3,21 @@ import os
 import Adafruit_DHT
 from datetime import datetime
 import csv
+from time import sleep
+from threading import Thread
 
 
 #### Logging Settings ####
+FILENAME = ""
+WRITE_FREQUENCY = 50
+DELAY = 60
+
+#### Functions ####
+def timed_log():
+    while True:
+      log_data()
+      sleep(DELAY)
+
 def log_data():
   output_string = ",".join(str(value) for value in data)
   batch_data.append(output_string)
@@ -16,10 +28,6 @@ def file_setup(filename):
   with open(filename,"w") as f:
       f.write(",".join(str(value) for value in header)+ "\n")
 
-FILENAME = ""
-WRITE_FREQUENCY = 50
-
-#### Functions ####
 def collect_time():
    return datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M')
 
@@ -54,9 +62,13 @@ else:
 
 file_setup(filename)
 
+if DELAY > 0:
+  Thread(target= timed_log).start()
+
 while True:
   data = gather_data()
-  log_data()
+  if DELAY == 0:
+      log_data()
 
   if len(batch_data) >= WRITE_FREQUENCY:
       print("Writing to file..")
