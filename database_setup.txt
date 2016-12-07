@@ -1,0 +1,6 @@
+sudo mysql –u –p # pw: shasta
+CREATE DATABASE weather_database;
+SHOW DATABASES;
+USE weather_database;
+
+CREATE TABLE weatherLog(datetime DATETIME NOT NULL, temperature FLOAT(5,2) NOT NULL, humidity FLOAT(5,2) NOT NULL);
