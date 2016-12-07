@@ -1,6 +1,7 @@
 import sys
 import os
 import Adafruit_DHT
+import MySQLdb
 from datetime import datetime
 import csv
 from time import sleep
@@ -11,6 +12,9 @@ from threading import Thread
 FILENAME = ""
 WRITE_FREQUENCY = 5
 DELAY = 60
+
+db = MySQLdb.connect(host="localhost", user="root",passwd="shasta", db="weather_database")
+cur = db.cursor()
 
 #### Functions ####
 def timed_log():
@@ -60,20 +64,39 @@ if FILENAME == "":
 else:
   filename = FILENAME + "-" + str(datetime.now().date()) + ".csv"
 
-file_setup(filename)
+#file_setup(filename)
 
+#while True:
+#    data = gather_data()
+#    print('reading complete')
+#    log_data()
+#    if len(batch_data) >= WRITE_FREQUENCY:
+#        print("Writing to file..")
+#        with open(filename,"a") as f:
+#            for line in batch_data:
+#                f.write(line + "\n")
+#            batch_data = []
+#    sleep(DELAY)
 while True:
     data = gather_data()
-    print('reading complete')
-    log_data()
-    if len(batch_data) >= WRITE_FREQUENCY:
-        print("Writing to file..")
-        with open(filename,"a") as f:
-            for line in batch_data:
-                f.write(line + "\n")
-            batch_data = []
-    sleep(DELAY)
-
+    print data
+    sql = ("""INSERT INTO tempLog (datetime,temperature,humidity) VALUES (%s,%s,%s)""",(data))
+    try:
+        print "Writing to database..."
+        # Execute the SQL command
+        cur.execute(*sql)
+        # Commit your changes in the database
+        db.commit()
+        print "Write Complete"
+ 
+    except:
+        # Rollback in case there is any error
+        db.rollback()
+        print "Failed writing to database"
+ 
+    cur.close()
+    db.close()
+    break
 # aggregate, print data
 #data = [date_time, temperature, humidity]
 #print "Data: ",
