@@ -43,7 +43,7 @@ def collect_data():
         temperature = None
         humidity = None
     
-    return humidity, temperature
+    return temperature, humidity
 
 def gather_data():
     reading = collect_data()
@@ -80,7 +80,7 @@ else:
 while True:
     data = gather_data()
     print data
-    sql = ("""INSERT INTO tempLog (datetime,temperature,humidity) VALUES (%s,%s,%s)""",(data))
+    sql = ("""INSERT INTO weatherLog (datetime,temperature,humidity) VALUES (%s,%s,%s)""",(data))
     try:
         print "Writing to database..."
         # Execute the SQL command
