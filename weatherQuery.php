@@ -35,5 +35,5 @@ foreach($result as $r) {
 $table['rows'] = $rows;
 
 $jsonTable = json_encode($table);
-
+echo $jsonTable
 ?>
