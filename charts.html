@@ -1,7 +1,7 @@
 <?php
 
 // Create connection
-$conn = new mysqli('localhost', 'root', 'shasta', 'weather_database');
+$sql = new mysqli('localhost', 'root', 'shasta', 'weather_database');
 
 // Check connection
 if (mysqli_connect_errno()) {
@@ -9,7 +9,8 @@ if (mysqli_connect_errno()) {
     exit();
   }
 
-$result = $mysqli->query("SELECT * FROM weatherLog WHERE datetime >= now() - INTERVAL 1 DAY;");
+$query = "SELECT * FROM weatherLog WHERE datetime >= now() - INTERVAL 1 DAY;"
+$result = $sql->query($query) or exit("Error code ({$sql->errno}): {$sql->error}");
 
 $rows = array();
 $table = array();
