@@ -1,16 +1,12 @@
 <?php
-
 // Create connection
 $sql = new mysqli('localhost', 'root', 'shasta', 'weather_database');
-
 // Check connection
 if ($sql->connect_errno > 0) {
     die("Connect failed: %s\n", $sql->connect_err);
   }
-
 $query = "SELECT * FROM weatherLog WHERE datetime >= now() - INTERVAL 1 DAY;"
 $result = $sql->query($query) or exit("Error code ({$sql->errno}): {$sql->error}");
-
 $rows = array();
 $table = array();
 $table['cols'] = array(
@@ -18,7 +14,6 @@ $table['cols'] = array(
 		array('label' => 'temperature', 'type' => 'number'),
 		array('label' => 'humidity', 'type' => 'number')
 );
-
 foreach($result as $r) {
 
 	$temp = array();
