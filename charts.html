@@ -26,11 +26,7 @@
               curveType: 'function',
               legend: { position: 'bottom' },
               width: 800,
-              height: 400,
-              hAxis: {
-                  format: 'M/d hh:mm',
-                  gridlines: {count: 15}
-                },
+              height: 400
               };
       	var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, options);
