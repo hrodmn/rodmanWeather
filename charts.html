@@ -11,6 +11,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
+if ( mysqli_connect_errno() ) {
+    /* oh no! there was an error code, what's the problem?! */
+    echo 'There was an error with your connection: '.mysqli_connect_error();
+}
+
 $sql = "SELECT * FROM weatherLog WHERE datetime >= now() - INTERVAL 1 DAY";
 $result = $conn->query($sql);
 
@@ -36,6 +41,7 @@ $table['rows'] = $rows;
 
 $jsonTable = json_encode($table);
 
+$sql->close();
 ?>
 
 <html>
