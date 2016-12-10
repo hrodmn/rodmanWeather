@@ -24,8 +24,8 @@ foreach($result as $r) {
 	$temp = array();
 
 	$temp[] = array('v' => (string) $r['datetime']);
-	$temp[] = array('v' => (int) $r['temperature']);
-	$temp[] = array('v' => (int) $r['humidity']);
+	$temp[] = array('v' => (float) $r['temperature']);
+	$temp[] = array('v' => (float) $r['humidity']);
 	$rows[] = array('c' => $temp);
 }
 
