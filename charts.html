@@ -11,30 +11,33 @@
     // Set a callback to run when the Google Visualization API is loaded.
     google.setOnLoadCallback(drawChart);
     
-    var jsonData = $.ajax({
-    	  url: "weatherQuery.php",
-    	  dataType:"json",
-    	  async: false
-    	  }).responseText;
+    
     	   
-    	// Create our data table out of JSON data loaded from server.
+    	
     
 
     function drawChart() {
-
-      // Create our data table out of JSON data loaded from server.
-      var data = new google.visualization.DataTable(jsonData);
-      var options = {
+    	
+    	// Create our data table out of JSON data loaded from server.
+    	var jsonData = $.ajax({
+      	  url: "weatherQuery.php",
+      	  dataType:"json",
+      	  async: false
+      	  }).responseText;
+    	// Create our data table out of JSON data loaded from server.
+		var data = new google.visualization.DataTable(jsonData);
+      	var options = {
     		  title: 'Last 24 hours:',
               curveType: 'function',
               legend: { position: 'bottom' },
               width: 400,
               height: 400
-      };
+              };
+      	var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
       // Instantiate and draw our chart, passing in some options.
       // Do not forget to check your div ID
-      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
+      
     }
     </script>
   </head>
