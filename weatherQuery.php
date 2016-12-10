@@ -1,18 +1,15 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "shasta";
-$dbname = "weather_database";
-
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+$sql = new mysqli('localhost', 'root', 'shasta', 'weather_database');
 
-$sql = "SELECT * FROM weatherLog WHERE datetime >= now() - INTERVAL 1 DAY";
-$result = $conn->query($sql);
+// Check connection
+if ($sql->connect_errno > 0) {
+	printf("Connect failed: %s\n", $sql->connect_err);
+}
+
+$query = "SELECT * FROM weatherLog WHERE datetime >= now() - INTERVAL 1 DAY"
+
+$result = $sql->query($query) or exit("Error code ({$sql->errno}): {$sql->error}");
 
 $rows = array();
 $table = array();
@@ -36,4 +33,6 @@ $table['rows'] = $rows;
 
 $jsonTable = json_encode($table);
 echo $jsonTable
+
+$sql->close();
 ?>
