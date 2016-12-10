@@ -27,8 +27,21 @@
               legend: { position: 'bottom' },
               width: 800,
               height: 400,
+              series: {
+                  // Gives each series an axis name that matches the Y-axis below.
+                  0: {axis: 'Temp'},
+                  1: {axis: 'Humidity'}
+                },
+                axes: {
+                  // Adds labels to each axis; they don't have to match the axis names.
+                  y: {
+                    Temp: {label: 'Temperature (Fahrenheit)'},
+                    Humidity: {label: 'Humidity (%)'}
+                  }
+                },
               hAxis: {
-                  gridlines: {
+                  format: 'M-d hh',
+            	  gridlines: {
                     count: -1,
                     units: {
                       days: {format: ['MMM dd']},
