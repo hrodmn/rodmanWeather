@@ -7,7 +7,7 @@ if ($sql->connect_errno > 0) {
 	printf("Connect failed: %s\n", $sql->connect_err);
 }
 
-$query = "SELECT * FROM weatherLog WHERE datetime >= now() - INTERVAL 1 DAY"
+$query = "SELECT * FROM weatherLog WHERE datetime >= now() - INTERVAL 1 DAY";
 
 $result = $sql->query($query) or exit("Error code ({$sql->errno}): {$sql->error}");
 
@@ -32,7 +32,7 @@ foreach($result as $r) {
 $table['rows'] = $rows;
 
 $jsonTable = json_encode($table);
-echo $jsonTable
+echo $jsonTable;
 
 $sql->close();
 ?>
