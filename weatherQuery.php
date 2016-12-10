@@ -23,7 +23,7 @@ foreach($result as $r) {
 
 	$temp = array();
 
-	$temp[] = array('v' => (string) $r['datetime']);
+	$temp[] = array('v' => (date) $r['datetime']);
 	$temp[] = array('v' => (int) $r['temperature']);
 	$temp[] = array('v' => (int) $r['humidity']);
 	$rows[] = array('c' => $temp);
