@@ -15,14 +15,14 @@
     function draw24Chart() {
     	
     	// Create our data table out of JSON data loaded from server.
-    	var jsonData = $.ajax({
+    	var day_jsonData = $.ajax({
       	  url: "last24Query.php",
       	  dataType:"json",
       	  async: false
       	  }).responseText;
     	// Create our data table out of JSON data loaded from server.
-		var data = new google.visualization.DataTable(jsonData);
-      	var options = {
+		var day_data = new google.visualization.DataTable(day_jsonData);
+      	var day_options = {
     		  chart:{
     			  title: 'Last 24 hours:',
     		  },
@@ -58,7 +58,7 @@
                 }
               };
       	var dayChart = new google.visualization.LineChart(document.getElementById('chart_24_div'));
-        dayChart.draw(data,  options);
+        dayChart.draw(day_data,  day_options);
       // Instantiate and draw our chart, passing in some options.
       // Do not forget to check your div ID
       
@@ -67,14 +67,14 @@
 	function draw7Chart() {
     	
     	// Create our data table out of JSON data loaded from server.
-    	var jsonData = $.ajax({
+    	var week_jsonData = $.ajax({
       	  url: "last7Query.php",
       	  dataType:"json",
       	  async: false
       	  }).responseText;
     	// Create our data table out of JSON data loaded from server.
-		var data = new google.visualization.DataTable(jsonData);
-      	var options = {
+		var data = new google.visualization.DataTable(week_jsonData);
+      	var week_options = {
     		  chart:{
     			  title: 'Last 7 days:',
     		  },
@@ -110,7 +110,7 @@
                 }
               };
       	var weekChart = new google.visualization.LineChart(document.getElementById('chart_7_div'));
-        weekChart.draw(data,  options);
+        weekChart.draw(week_data,  week_options);
       // Instantiate and draw our chart, passing in some options.
       // Do not forget to check your div ID
       
@@ -122,7 +122,11 @@
 
   <body>
     <!--this is the div that will hold the chart-->
-    <div id="chart_24_div"></div>
-    <div id="chart_7_div"></div>
+    <table class="rows">
+      <tr>
+        <td><div id="chart_24_div" style="border: 1px solid #ccc"></div></td>
+        <td><div id="chart_7_div" style="border: 1px solid #ccc"></div></td>
+      </tr>
+    </table>
   </body>
 </html>
