@@ -9,13 +9,14 @@
     google.charts.load('current', {'packages':['corechart']});
       
     // Set a callback to run when the Google Visualization API is loaded.
-    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(draw24Chart);
+    google.charts.setOnLoadCallback(draw7Chart);
 
-    function drawChart() {
+    function draw24Chart() {
     	
     	// Create our data table out of JSON data loaded from server.
     	var jsonData = $.ajax({
-      	  url: "weatherQuery.php",
+      	  url: "last24Query.php",
       	  dataType:"json",
       	  async: false
       	  }).responseText;
@@ -56,17 +57,72 @@
                   }
                 }
               };
-      	var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-        chart.draw(data,  options);
+      	var dayChart = new google.visualization.LineChart(document.getElementById('chart_24_div'));
+        dayChart.draw(data,  options);
+      // Instantiate and draw our chart, passing in some options.
+      // Do not forget to check your div ID
+      
+    },
+    
+	function draw7Chart() {
+    	
+    	// Create our data table out of JSON data loaded from server.
+    	var jsonData = $.ajax({
+      	  url: "last7Query.php",
+      	  dataType:"json",
+      	  async: false
+      	  }).responseText;
+    	// Create our data table out of JSON data loaded from server.
+		var data = new google.visualization.DataTable(jsonData);
+      	var options = {
+    		  chart:{
+    			  title: 'Last 7 days:',
+    		  },
+              curveType: 'function',
+              legend: { position: 'bottom' },
+              width: 800,
+              height: 400,
+              colors: ['#b30000', '#333399'],
+              series: {
+                  0: {targetAxisIndex: 0},
+                  1: {targetAxisIndex: 1}
+                },
+              vAxes: {
+                  // Adds titles to each axis.
+                  0: {title: 'Temperature (Fahrenheit)'},
+                  1: {title: 'Humidity (%)'}
+                },
+              hAxis: {
+                  format: 'M-d hh',
+            	  gridlines: {
+                    count: -1,
+                    units: {
+                      days: {format: ['MMM dd']},
+                      hours: {format: ['HH:mm', 'ha']},
+                    }
+                  },
+                  minorGridlines: {
+                    units: {
+                      hours: {format: ['hh:mm:ss a', 'ha']},
+                      minutes: {format: ['HH:mm a Z', ':mm']}
+                    }
+                  }
+                }
+              };
+      	var weekChart = new google.visualization.LineChart(document.getElementById('chart_7_div'));
+        weekChart.draw(data,  options);
       // Instantiate and draw our chart, passing in some options.
       // Do not forget to check your div ID
       
     }
+    
+    
     </script>
   </head>
 
   <body>
-    <!--this is the div that will hold the pie chart-->
-    <div id="chart_div"></div>
+    <!--this is the div that will hold the chart-->
+    <div id="chart_24_div"></div>
+    <div id="chart_7_div"></div>
   </body>
 </html>
