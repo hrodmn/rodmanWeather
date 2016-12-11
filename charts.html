@@ -73,7 +73,7 @@
       	  async: false
       	  }).responseText;
     	// Create our data table out of JSON data loaded from server.
-		var data = new google.visualization.DataTable(week_jsonData);
+		var week_data = new google.visualization.DataTable(week_jsonData);
       	var week_options = {
     		  chart:{
     			  title: 'Last 7 days:',
@@ -111,8 +111,6 @@
               };
       	var weekChart = new google.visualization.LineChart(document.getElementById('chart_7_div'));
         weekChart.draw(week_data,  week_options);
-      // Instantiate and draw our chart, passing in some options.
-      // Do not forget to check your div ID
       
     }
     
