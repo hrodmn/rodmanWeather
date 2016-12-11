@@ -7,7 +7,9 @@ if ($sql->connect_errno > 0) {
 	printf("Connect failed: %s\n", $sql->connect_err);
 }
 
-$query = "SELECT * FROM weatherLog WHERE datetime >= now() - INTERVAL 7 DAY";
+$query = "SELECT datetime, AVG(temperature) AS meanTemp, AVG(humidity) AS meanHumidity 
+		FROM weatherLog WHERE datetime >= now() - INTERVAL 7 DAY
+		GROUP BY DATE(datetime), HOUR(datetime)";
 
 $result = $sql->query($query) or exit("Error code ({$sql->errno}): {$sql->error}");
 
@@ -15,8 +17,8 @@ $rows = array();
 $table = array();
 $table['cols'] = array(
 		array('label' => 'datetime', 'type' => 'date'),
-		array('label' => 'temperature', 'type' => 'number'),
-		array('label' => 'humidity', 'type' => 'number')
+		array('label' => 'meanTemp', 'type' => 'number'),
+		array('label' => 'meanHumidity', 'type' => 'number')
 );
 
 foreach($result as $r) {
@@ -29,8 +31,8 @@ foreach($result as $r) {
                                      date('H',strtotime($r['datetime'])).','.
                                      date('i',strtotime($r['datetime'])).','.
                                      date('s',strtotime($r['datetime'])).')');
-	$temp[] = array('v' => (float) $r['temperature']);
-	$temp[] = array('v' => (float) $r['humidity']);
+	$temp[] = array('v' => (float) $r['meanTemp']);
+	$temp[] = array('v' => (float) $r['meanHumidity']);
 	$rows[] = array('c' => $temp);
 }
 
