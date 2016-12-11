@@ -15,14 +15,14 @@
     function draw24Chart() {
     	
     	// Create our data table out of JSON data loaded from server.
-    	var day_jsonData = $.ajax({
+    	var jsonData = $.ajax({
       	  url: "last24Query.php",
       	  dataType:"json",
       	  async: false
       	  }).responseText;
     	// Create our data table out of JSON data loaded from server.
-		var day_data = new google.visualization.DataTable(day_jsonData);
-      	var day_options = {
+		var data = new google.visualization.DataTable(jsonData);
+      	var options = {
     		  chart:{
     			  title: 'Last 24 hours:',
     		  },
@@ -57,24 +57,24 @@
                   }
                 }
               };
-      	var dayChart = new google.visualization.LineChart(document.getElementById('chart_24_div'));
-        dayChart.draw(day_data,  day_options);
+      	var chart = new google.visualization.LineChart(document.getElementById('chart_24_div'));
+        chart.draw(data,  options);
       // Instantiate and draw our chart, passing in some options.
       // Do not forget to check your div ID
       
-    },
+    }
     
 	function draw7Chart() {
     	
     	// Create our data table out of JSON data loaded from server.
-    	var week_jsonData = $.ajax({
+    	var jsonData = $.ajax({
       	  url: "last7Query.php",
       	  dataType:"json",
       	  async: false
       	  }).responseText;
     	// Create our data table out of JSON data loaded from server.
-		var week_data = new google.visualization.DataTable(week_jsonData);
-      	var week_options = {
+		var data = new google.visualization.DataTable(sonData);
+      	var options = {
     		  chart:{
     			  title: 'Last 7 days:',
     		  },
@@ -109,8 +109,8 @@
                   }
                 }
               };
-      	var weekChart = new google.visualization.LineChart(document.getElementById('chart_7_div'));
-        weekChart.draw(week_data,  week_options);
+      	var chart = new google.visualization.LineChart(document.getElementById('chart_7_div'));
+        chart.draw(data, options);
       
     }
     
