@@ -12,16 +12,19 @@
     google.charts.setOnLoadCallback(draw24Chart);
     google.charts.setOnLoadCallback(draw7Chart);
 
-    function draw24Chart() {
+    var data24 = $.ajax({
+    	  url: "last24Query.php",
+    	  dataType:"json",
+    	  async: false
+    	  }).responseText;
+    
+    function draw24temp() {
     	
     	// Create our data table out of JSON data loaded from server.
-    	var jsonData = $.ajax({
-      	  url: "last24Query.php",
-      	  dataType:"json",
-      	  async: false
-      	  }).responseText;
+    	
     	// Create our data table out of JSON data loaded from server.
-		var data = new google.visualization.DataTable(jsonData);
+		var view = new google.visualization.DataView(data24);
+		view.setColumns([0,1]);
       	var options = {
     		  chart:{
     			  title: 'Last 24 hours:',
@@ -30,15 +33,10 @@
               legend: { position: 'bottom' },
               width: 800,
               height: 400,
-              colors: ['#b30000', '#333399'],
-              series: {
-                  0: {targetAxisIndex: 0},
-                  1: {targetAxisIndex: 1}
-                },
+              colors: ['#b30000'],
               vAxes: {
                   // Adds titles to each axis.
                   0: {title: 'Temperature (Fahrenheit)'},
-                  1: {title: 'Humidity (%)'}
                 },
               hAxis: {
                   format: 'M-d hh',
@@ -58,7 +56,7 @@
                 }
               };
       	var chart = new google.visualization.LineChart(document.getElementById('chart_24_div'));
-        chart.draw(data,  options);
+        chart.draw(view,  options);
       // Instantiate and draw our chart, passing in some options.
       // Do not forget to check your div ID
       
