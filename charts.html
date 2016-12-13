@@ -15,15 +15,17 @@
     function draw24temp() {
     	
     	// Create our data table out of JSON data loaded from server.
-    	var data24 = $.ajax({
+    	var jsonData = $.ajax({
     	  url: "last24Query.php",
     	  dataType:"json",
     	  async: false
     	  }).responseText;
     	
     	// Create our data view out of json input.
-		var view = new google.visualization.DataView(data24);
+    	var data = new google.visualization.DataTable(jsonData);
+		var view = new google.visualization.DataView(data);
 		view.setColumns([0,1]);
+		
       	var options = {
     		  chart:{
     			  title: 'Last 24 hours:',
