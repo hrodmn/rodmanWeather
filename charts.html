@@ -12,17 +12,17 @@
     google.charts.setOnLoadCallback(draw24temp);
     google.charts.setOnLoadCallback(draw7Chart);
     
+ // Create our data table out of JSON data loaded from server.
+    var data24 = $.ajax({
+  	  url: "last24Query.php",
+  	  dataType:"json",
+  	  async: false
+  	  }).responseText;
+    
     function draw24temp() {
     	
-    	// Create our data table out of JSON data loaded from server.
-    	var jsonData = $.ajax({
-    	  url: "last24Query.php",
-    	  dataType:"json",
-    	  async: false
-    	  }).responseText;
-    	
     	// Create our data view out of json input.
-    	var data = new google.visualization.DataTable(jsonData);
+    	var data = new google.visualization.DataTable(data24);
 		var view = new google.visualization.DataView(data);
 		view.setColumns([0,1]);
 		
