@@ -10,6 +10,7 @@
       
     // Set a callback to run when the Google Visualization API is loaded.
     google.charts.setOnLoadCallback(draw24temp);
+    google.charts.setOnLoadCallback(draw24humidity);
     google.charts.setOnLoadCallback(draw7Chart);
     
  // Create our data table out of JSON data loaded from server.
@@ -55,7 +56,50 @@
                   }
                 }
               };
-      	var chart = new google.visualization.LineChart(document.getElementById('chart_24_div'));
+      	var chart = new google.visualization.LineChart(document.getElementById('temp_24_div'));
+        chart.draw(view,  options);
+      // Instantiate and draw our chart, passing in some options.
+      // Do not forget to check your div ID
+      
+    }
+    
+function draw24temp() {
+    	
+    	// Create our data view out of json input.
+    	var data = new google.visualization.DataTable(data24);
+		var view = new google.visualization.DataView(data);
+		view.setColumns([0,2]);
+		
+      	var options = {
+    		  chart:{
+    			  title: 'Last 24 hours:',
+    		  },
+              curveType: 'function',
+              legend: { position: 'bottom' },
+              width: 800,
+              height: 400,
+              colors: ['#b30000'],
+              vAxis: {
+            	  title: 'Humidity (%)'
+                },
+              hAxis: {
+                  format: 'M-d hh',
+            	  gridlines: {
+                    count: -1,
+                    units: {
+                      days: {format: ['MMM dd']},
+                      hours: {format: ['HH:mm', 'ha']},
+                    }
+                  },
+                  minorGridlines: {
+                    units: {
+                      hours: {format: ['hh:mm:ss a', 'ha']},
+                      minutes: {format: ['HH:mm a Z', ':mm']}
+                    }
+                  }
+                }
+              };
+      	var chart = new google.visualization.LineChart(document.getElementById('humidity_24_div'));
         chart.draw(view,  options);
       // Instantiate and draw our chart, passing in some options.
       // Do not forget to check your div ID
@@ -119,7 +163,8 @@
   <body>
     <!--this is the div that will hold the chart-->
     <section>
-    	<div id="chart_24_div"></div>
+    	<div id="temp_24_div"></div>
+    	<div id="humidity_24_div"></div>
    		<div id="chart_7_div"></div>
     </section>
     <aside>
