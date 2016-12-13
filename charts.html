@@ -11,18 +11,17 @@
     // Set a callback to run when the Google Visualization API is loaded.
     google.charts.setOnLoadCallback(draw24temp);
     google.charts.setOnLoadCallback(draw7Chart);
-
-    var data24 = $.ajax({
-    	  url: "last24Query.php",
-    	  dataType:"json",
-    	  async: false
-    	  }).responseText;
     
     function draw24temp() {
     	
     	// Create our data table out of JSON data loaded from server.
+    	var data24 = $.ajax({
+    	  url: "last24Query.php",
+    	  dataType:"json",
+    	  async: false
+    	  }).responseText;
     	
-    	// Create our data table out of JSON data loaded from server.
+    	// Create our data view out of json input.
 		var view = new google.visualization.DataView(data24);
 		view.setColumns([0,1]);
       	var options = {
