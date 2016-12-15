@@ -161,9 +161,12 @@
     </script>
     
     <style>
-    	.imgContainer {
-      		float:left;
-   		}
+    	.container {
+    		width: 3000px;
+		}
+		p {
+    		clear: both;
+		}
   	</style>
     
   </head>
@@ -171,7 +174,7 @@
   <body>
     <!--this is the div that will hold the chart-->
     <section>
-    	<div>
+    	<div class="container">
     		<h1>Last 24 Hours</h1>
     		<div id="temp_24_div"></div>
     		<div id="humidity_24_div"></div>
