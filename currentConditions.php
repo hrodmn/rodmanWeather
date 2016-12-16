@@ -7,7 +7,7 @@ if ($sql->connect_errno > 0) {
 	printf("Connect failed: %s\n", $sql->connect_err);
 }
 
-$query = "SELECT * FROM weatherLog WHERE datetime >= now() - INTERVAL 1 DAY";
+$query = "SELECT * FROM weatherLog WHERE datetime = (SELECT MAX(datetime) FROM weatherLog) LIMIT 1;";
 
 $result = $sql->query($query) or exit("Error code ({$sql->errno}): {$sql->error}");
 
