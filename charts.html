@@ -155,21 +155,20 @@
               };
       	var chart = new google.visualization.LineChart(document.getElementById('chart_7_div'));
         chart.draw(data, options);
-        
-        function drawCurrentConditions() {
-            var jsonData = $.ajax({
-            	  url: "currentConditions.php",
-              	  dataType:"json",
-              	  async: false
-              	  }).responseText;
- 
-            var data = new google.visualization.DataTable(jsonData);
-            var table = new google.visualization.Table(document.getElementById('current_conditions_div'));
-
-            table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
-          }
-      
     }
+	
+	function drawCurrentConditions() {
+        var jsonData = $.ajax({
+        	  url: "currentConditions.php",
+          	  dataType:"json",
+          	  async: false
+          	  }).responseText;
+
+        var data = new google.visualization.DataTable(jsonData);
+        var table = new google.visualization.Table(document.getElementById('current_conditions_div'));
+
+        table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
+      }
     
     
     </script>
