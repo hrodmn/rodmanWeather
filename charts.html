@@ -163,11 +163,22 @@
           	  dataType:"json",
           	  async: false
           	  }).responseText;
+        
+        var options = {
+        		showRowNumber: false, 
+        		width: 300, 
+        		height: 100
+        		
+        }
+        
+        var cssClassNames = {
+        	    'headerRow': 'bold-green-font center-text',
+        	    'tableRow': 'center-text'};
 
         var data = new google.visualization.DataTable(jsonData);
         var table = new google.visualization.Table(document.getElementById('current_conditions_div'));
 
-        table.draw(data, {showRowNumber: false, width: 300, height: 100});
+        table.draw(data, options);
      }
     
     
@@ -179,6 +190,17 @@
 		}
 		p {
     		clear: both;
+		}
+		.bold-green-font {
+			font-weight: bold;
+			color: green;
+		}
+
+ 		.bold-font {
+    		font-weight: bold;
+		}
+		.center-text {
+			text-align: center;
 		}
 		#temp_24_div{
     		float: left;
