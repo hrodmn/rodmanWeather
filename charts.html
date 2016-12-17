@@ -164,16 +164,19 @@
           	  async: false
           	  }).responseText;
         
+        var cssClassNames = {
+        	    'headerRow': 'bold-green-font center-text',
+        	    'tableRow': 'center-text'};
+        
         var options = {
+        		cssClassNames: cssClassNames,
         		showRowNumber: false, 
         		width: 300, 
         		height: 100
         		
         }
         
-        var cssClassNames = {
-        	    'headerRow': 'bold-green-font center-text',
-        	    'tableRow': 'center-text'};
+        
 
         var data = new google.visualization.DataTable(jsonData);
         var table = new google.visualization.Table(document.getElementById('current_conditions_div'));
