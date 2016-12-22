@@ -27,8 +27,7 @@ foreach($result as $r) {
                                      (date('n',strtotime($r['datetime'])) - 1).','.
                                      date('d',strtotime($r['datetime'])).','.
                                      date('H',strtotime($r['datetime'])).','.
-                                     date('i',strtotime($r['datetime'])).','.
-                                     date('s',strtotime($r['datetime'])).')');
+                                     date('i',strtotime($r['datetime'])).')');
 	$temp[] = array('v' => (float) $r['temperature']);
 	$temp[] = array('v' => (float) $r['humidity']);
 	$rows[] = array('c' => $temp);
