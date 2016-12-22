@@ -14,7 +14,7 @@ $result = $sql->query($query) or exit("Error code ({$sql->errno}): {$sql->error}
 $rows = array();
 $table = array();
 $table['cols'] = array(
-		array('label' => 'datetime', 'type' => 'date'),
+		array('label' => 'datetime', 'type' => 'datetime'),
 		array('label' => 'temperature', 'type' => 'number'),
 		array('label' => 'humidity', 'type' => 'number')
 );
