@@ -176,9 +176,11 @@
         		
         }
         
-        
+        var formatter_medium = new google.visualization.DateFormat({formatType: 'medium'});
 
         var data = new google.visualization.DataTable(jsonData);
+        formatter_medium.format(data, 0);
+        
         var table = new google.visualization.Table(document.getElementById('current_conditions_div'));
 
         table.draw(data, options);
