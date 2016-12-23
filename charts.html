@@ -21,11 +21,19 @@
   	  dataType:"json",
   	  async: false
   	  }).responseText;
+ 
+    var allData = $.ajax({
+    	  url: "weatherQuery.php",
+    	  dataType:"json",
+    	  async: false
+    	  }).responseText;
+    
+    var data24try = allData.last24
     
     function draw24temp() {
     	
     	// Create our data view out of json input.
-    	var data = new google.visualization.DataTable(data24);
+    	var data = new google.visualization.DataTable(data24try);
 		var view = new google.visualization.DataView(data);
 		view.setColumns([0,1]);
 		
