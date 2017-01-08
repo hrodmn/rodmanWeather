@@ -1,4 +1,6 @@
 <?php
+$days = $_POST['days'];
+
 // Create connection
 $sql = new mysqli('localhost', 'root', 'shasta', 'weather_database');
 
@@ -8,7 +10,7 @@ if ($sql->connect_errno > 0) {
 }
 
 $query = "SELECT datetime, AVG(temperature) AS meanTemp, AVG(humidity) AS meanHumidity 
-		FROM weatherLog WHERE datetime >= now() - INTERVAL 7 DAY
+		FROM weatherLog WHERE datetime >= now() - INTERVAL '".$days."' DAY
 		GROUP BY DATE(datetime), HOUR(datetime)";
 
 $result = $sql->query($query) or exit("Error code ({$sql->errno}): {$sql->error}");
