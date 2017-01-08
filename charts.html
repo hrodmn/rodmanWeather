@@ -120,7 +120,7 @@
 		var data = new google.visualization.DataTable(jsonData);
       	var options = {
     		  chart:{
-    			  title: 'Last 7 days: hourly averages',
+    			  title: 'Last X days: hourly averages',
     		  },
               curveType: 'function',
               legend: { position: 'bottom' },
@@ -237,7 +237,7 @@
     	</div>
    		<p><p/>
    		<form action="last7Query.php" method="post">
-   		  	<select name="days" onChange="draw7Chart()">
+   		  	<select name="days" onChange="draw7Chart.call()">
     			<option value="7">Last 7 days</option>
     			<option value="30">Last 30 days</option>
     			<option value="60">Last 60 days</option>
