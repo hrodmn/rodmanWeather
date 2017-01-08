@@ -237,12 +237,11 @@
     	</div>
    		<p><p/>
    		<form action="last7Query.php" method="post">
-   		  	<select name="days" onChange="draw7Chart.call()">
+   		  	<select name="days" onchange="draw7Chart.call()">
     			<option value=7>Last 7 days</option>
     			<option value=30>Last 30 days</option>
     			<option value=60>Last 60 days</option>
 		  	</select>
-		  	<input type="submit" name="submit" value="Go"/>
    		</form>
     	<h1>Last  days</h1>
    		<div id="chart_7_div"></div>
